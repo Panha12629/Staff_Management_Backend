@@ -1,8 +1,13 @@
-1. Clone the Repository
+Staff Management Application
+
+A simple Staff Management system using ASP.NET Core Web API (backend with PostgreSQL) and React (frontend).
+
+Backend Setup (ASP.NET Core API)
+## 1️⃣ Clone the Repository
 git clone https://github.com/Panha12629/Staff_Management_Backend.git
 cd Staff_Management.API
 
-2. Configure Database
+## 2️⃣ Configure Database
 
 Update appsettings.json with your PostgreSQL connection string:
 
@@ -13,24 +18,32 @@ Update appsettings.json with your PostgreSQL connection string:
 
 ⚠️ Tip: Replace yourpassword with your actual PostgreSQL password.
 
-3. Apply Migrations & Create Database
+## 3️⃣ Apply Migrations & Create Database
 
-Run one of the following commands to apply migrations and create the database:
+Run one of the following commands:
 
 dotnet ef database update
 
 
-or, if using Package Manager Console in Visual Studio:
+Or, if using Visual Studio Package Manager Console:
 
 Update-Database
 
-4. Run the API
 
-Start the backend server with:
+This will create the database and apply all migrations.
+
+## 4️⃣ Run the Backend API
+
+Start the backend server:
 
 dotnet run
 
 
 The API will be available at:
 
-https://localhost:5282
+https://localhost:7012
+
+
+✅ Test an endpoint (example):
+
+https://localhost:7012/api/staff
