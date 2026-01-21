@@ -1,0 +1,57 @@
+name: Backend CI - ASP.NET Core 8 + DDD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: yourpassword
+          POSTGRES_DB: StaffDB
+        ports:
+          - 5432:5432
+ 
+
+    appsetting.json:
+      ConnectionStrings__DefaultConnection: Host=localhost;Database=StaffDB;Username=postgres;Password=yourpassword
+
+    steps:
+      # Checkout repo
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Setup .NET 8
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0.x
+
+      # Restore dependencies
+      - name: Restore dependencies
+        run: dotnet restore ./Staff_Management.sln
+
+      # Build all projects (Domain, Application, Infrastructure, API)
+      - name: Build solution
+        run: dotnet build ./Staff_Management.sln --configuration Release --no-restore
+
+      # Run all tests
+      - name: Run tests
+        run: dotnet test ./Staff_Management.sln --no-build --verbosity normal
+
+      # Apply EF Core migrations
+      - name: Apply EF Core migrations
+        run: dotnet ef database update --project ./Staff_Management.Infrastructure --startup-project ./Staff_Management.API
+        or: Update-Database
+
+      # Publish API
+      - name: Publish API
+        run: dotnet publish ./Staff_Management.API -c Release -o ./publish
