@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Staff_Management.Application.Common;
 using Staff_Management.Application.Common.Interfaces;
-using Staff_Management.Application.Features.Academics;
 using Staff_Management.Domain.Entities;
 
 namespace Staff_Management.Application.Features.Staffs

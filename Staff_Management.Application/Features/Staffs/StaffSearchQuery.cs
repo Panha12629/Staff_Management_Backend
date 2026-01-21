@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Staff_Management.Application.Common;
 using Staff_Management.Application.Common.Interfaces;
-using Staff_Management.Application.Features.Academics;
 
 namespace Staff_Management.Application.Features.Staffs
 {

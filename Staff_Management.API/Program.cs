@@ -1,7 +1,10 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using QuestPDF.Infrastructure;
 using Staff_Management.Application.Common.Interfaces;
 using Staff_Management.Application.Features.Staffs;
+using Staff_Management.Application.Services;
+using Staff_Management.Infrasructure.Services;
 using Staff_Management.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,7 +22,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReact", policy =>
     {
-        policy.AllowAnyOrigin()   // For dev only, allow React frontend
+        policy.AllowAnyOrigin()  
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -27,6 +30,8 @@ builder.Services.AddCors(options =>
 
 // Register MediatR
 builder.Services.AddMediatR(typeof(StaffCreateCommandHandler).Assembly);
+builder.Services.AddScoped<IExportService, ExportService>();
+QuestPDF.Settings.License = LicenseType.Community;
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();

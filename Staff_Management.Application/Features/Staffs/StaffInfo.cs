@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Staff_Management.Application.Features.Academics
+namespace Staff_Management.Application.Features
 {
     public class StaffInfo
     {
